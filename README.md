@@ -55,7 +55,7 @@ HTTP协议已经用了20年的历史，从HTTP 1.0 到现在的HTTP 5，网页�
 
 IPFS至少有七层协议栈，从下至上分别为身份、网络、路由、交换、对象、文件、命名、应用（有些认为八层协议栈的存在应用层），每层协议栈各司其职，写成独立于上层，但上层依赖于下层。
 
-![](http://39.108.133.122/Images/ipfs/IPFSflows.png)
+![](https://github.com/Kevin-miu/IPFSNotebook/raw/master/image/IPFSflows.png)
 
 各层解释：
 
