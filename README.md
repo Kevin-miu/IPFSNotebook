@@ -16,7 +16,7 @@
 - IPFS——它能取代HTTP协议？ https://www.jianshu.com/p/ddccae89a49a
 
 **PPT:**
-[PPT](http://39.108.133.122/Images/ipfs/IPFS协议.pptx)
+[PPT](https://github.com/Kevin-miu/IPFSNotebook/raw/master/image/IPFS协议.pptx)
 
 ## IPFS简介
 
@@ -121,11 +121,11 @@ Kademlia在异或距离度量的基础上又把整个DHT网络拓扑组织成一
 
 例如：以下5个节点将会根据其ID组织成二叉树（模拟）
 
-![](http://39.108.133.122/Images/ipfs/node-tree.png)
+![](https://github.com/Kevin-miu/IPFSNotebook/raw/master/image/node-tree.png)
 
 为了快速到达这160棵子树，处于DHT网络的每一个节点都记录了每棵子树上的K个节点的信息（ip，port，id），在BT中K固定为8。这份记录信息称为K桶，也叫路由表。这个路由表与通常IP路由的概念不一样，它代表了到达处于自己某个距离范围[2i—2i+1)的节点，可以通过该范围所选取的K个节点来定位。下图是路由表的结构：
 
-![](http://39.108.133.122/Images/ipfs/routing.png)
+![](https://github.com/Kevin-miu/IPFSNotebook/raw/master/image/routing.png)
 
 实际上，路由表可能没有160份，因为路由表是对半拆分的，最初只有一份，在插入过程中，该路由表的节点大于k(8)时，则拆分成两半，一半包含自身节点，一半不包含自身节点，循环往复。（_？路由表的节点大于k(8)？怎么拆分？_）
 每一个新加入DHT网络的节点，其路由表是空的，通过以下方式逐步形成自己的路由表：
@@ -164,13 +164,13 @@ Merkle Tree，通常也被称作Hash Tree，顾名思义，就是存储hash值�
 在在点对点网络的场景中，由于节点机器被认为是不稳定或不可信的，为了校验数据的完整性，更好的办法就是将大份数据分割成许多小的数据块来保存和传输。这样做的好处就是，当数据出错时，只需要对错误的数据进行重传。
 第一种方法就是Hash List：
 
-![](http://39.108.133.122/Images/ipfs/hashlist.png)
+![](https://github.com/Kevin-miu/IPFSNotebook/raw/master/image/hashlist.png)
 
 点对点下载的时候，在真正地下载数据之前，会先下载一个Hash列表，该Hash列表就是各个数据块的Hash值。然后从可信的服务器获取根hash（就是图中的top hash），用根hash来校验hash列表。校验过程是：将Hash列表的所有hash按顺序结成字符串，再做一次Hash运算，结果与根Hash对比。
 第二种方法就是Merkle Tree，
 跟Hash List一样，Merkle Tree先计算小数据块的hash值，然后按顺序将相邻的hash合并成字符串，再计算该字符串的hash，逐级计算，最终得出树根Merkle Root。
 
-![](http://39.108.133.122/Images/ipfs/hashtree.png)
+![](https://github.com/Kevin-miu/IPFSNotebook/raw/master/image/hashtree.png)
 
 点对点下载的时候，从可信源获取Merkle Root，从不可信源获取Merkle Tree，这样就这一检验数据是否有错误。与Hash List不同的是，Merkle Tree可以直接下载并立即检验树的一个分支：如果数据块错误，需要下载完整的Hash List来验证，而Merkle tree只需要下载一个分支并立即验证，不同在下载另一个分支，以此类推。
 
@@ -180,7 +180,7 @@ Merkle Tree的特点：
 2. MT的叶子节点的值可以是小数据块的hash或小数据块；
 3. 非叶子节点的值都是其子节点值的hash结果。
 
-详细的[Merkle Tree算法解析](http://39.108.133.122/Images/ipfs/MerkleTree算法解析.pdf)请点击
+详细的[Merkle Tree算法解析](https://github.com/Kevin-miu/IPFSNotebook/raw/master/image/MerkleTree算法解析.pdf)请点击
 
 **Merkle DAG**
 Merkle DAG的全称是 Merkle directed acyclic graph（默克有向无环图），它是在Merkle tree基础上构建的。Merkle DAG跟Merkle tree很相似，区别在于：Merkle DAG不需要进行树的平衡操作，非叶子节点允许包含数据等。
@@ -191,7 +191,7 @@ IPFS的Merkle DAG是由Git改造而来的，定义了一组对象：
 - Tree-块、链表或者而其他树的集合。Tree代表一个目录，一个名字到哈希值的映射。哈希值则代表了bolbs、lists和其他trees。
 - Commit-任何对象在版本历史记录中的一个快照。他同样连接着父提交。
 
-![](http://39.108.133.122/Images/ipfs/merkleDAG.png)
+![](https://github.com/Kevin-miu/IPFSNotebook/raw/master/image/merkleDAG.png)
 
 Merkle DAG拥有如下的功能：
 
@@ -199,7 +199,7 @@ Merkle DAG拥有如下的功能：
 - 防篡改：可以方便的检查哈希值来确认数据是否被篡改
 - 去重：由于内容相同的数据块哈希是相同的，可以很容去掉重复的数据，节省存储空间
 
-详细的[Git命令解释](http://39.108.133.122/Images/ipfs/Git命令解释.pdf)请点击
+详细的[Git命令解释](https://github.com/Kevin-miu/IPFSNotebook/raw/master/image/Git命令解释.pdf)请点击
 
 ### 3.Bittorrent和BitSwap
 
@@ -246,7 +246,7 @@ IPFS每一个节点都维护了两个列表：
 
 IPFS提供一个可参考的策略机制（实际的实现可以有所变化）
 
-![](http://39.108.133.122/Images/ipfs/strategy.png)
+![](https://github.com/Kevin-miu/IPFSNotebook/raw/master/image/strategy.png)
 
 ### 4.IPNS
 
